@@ -81,9 +81,9 @@ async function getBrowser() {
       // Increase timeout for cold starts
       browserInstance = await puppeteerCore.launch({
         args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
+        defaultViewport: { width: 1920, height: 1080 },
         executablePath: await chromium.executablePath(),
-        headless: chromium.headless,
+        headless: true,
         ignoreHTTPSErrors: true,
       } as any) as unknown as Browser;
     } else {
