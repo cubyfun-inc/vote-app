@@ -100,7 +100,7 @@ async function getBrowser() {
           '--window-size=375,812', // Mobile size
         ],
         ignoreDefaultArgs: ['--enable-automation'],
-      });
+      } as any) as unknown as Browser;
     }
   }
   return browserInstance;
