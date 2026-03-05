@@ -1,7 +1,6 @@
 import axios from 'axios';
-import puppeteerCore from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
-import type { Browser, Page } from 'puppeteer';
+import chromium from '@sparticuz/chromium-min';
+import puppeteerCore, { Browser, Page } from 'puppeteer-core';
 
 interface VideoData {
   platform: 'bilibili' | 'douyin' | 'xiaohongshu';
@@ -82,7 +81,7 @@ async function getBrowser() {
       browserInstance = await puppeteerCore.launch({
         args: chromium.args,
         defaultViewport: { width: 1920, height: 1080 },
-        executablePath: await chromium.executablePath(),
+        executablePath: await chromium.executablePath('https://github.com/Sparticuz/chromium/releases/download/v141.0.0/chromium-v141.0.0-pack.x64.tar'),
         headless: true,
         ignoreHTTPSErrors: true,
       } as any) as unknown as Browser;
