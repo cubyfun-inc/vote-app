@@ -8,8 +8,16 @@ interface VideoData {
   likes: number;
   user: string;
   title?: string;
+  duration?: string;
   originalUrl: string;
   videoId: string;
+}
+
+function formatDuration(seconds: number): string {
+  if (!seconds) return '';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
 // Helper to resolve short links
@@ -52,6 +60,7 @@ async function scrapeBilibili(url: string): Promise<VideoData> {
     likes: videoInfo.stat.like,
     user: videoInfo.owner.name,
     title: videoInfo.title,
+    duration: formatDuration(videoInfo.duration),
     originalUrl: url,
     videoId: bvid
   };
@@ -153,12 +162,17 @@ async function scrapeDouyin(url: string): Promise<VideoData> {
 
     let likes = 0;
     let authorName = 'Unknown User';
+    let durationStr = '';
 
     if (renderData) {
         likes = findDeepValue(renderData, 'diggCount') || findDeepValue(renderData, 'digg_count') || 0;
         authorName = findDeepValue(renderData, 'nickname') || findDeepValue(renderData, 'unique_id') || 'Unknown User';
         if (!videoId) {
             videoId = findDeepValue(renderData, 'awemeId') || findDeepValue(renderData, 'aweme_id') || '';
+        }
+        const durationMs = findDeepValue(renderData, 'duration') || findDeepValue(renderData, 'video_duration');
+        if (durationMs) {
+             durationStr = formatDuration(Math.floor(durationMs / 1000));
         }
     }
 
@@ -227,6 +241,7 @@ async function scrapeDouyin(url: string): Promise<VideoData> {
       platform: 'douyin',
       likes: typeof likes === 'string' ? parseCount(likes) : (likes || 0),
       user: authorName || 'Unknown',
+      duration: durationStr,
       originalUrl: url,
       videoId: videoId
     };
@@ -279,6 +294,7 @@ async function scrapeXiaohongshu(url: string): Promise<VideoData> {
 
     let user = 'Unknown';
     let likes = 0;
+    let durationStr = '';
 
     if (xhsData) {
         const noteUser = xhsData.note?.user || xhsData.note?.author;
@@ -301,6 +317,11 @@ async function scrapeXiaohongshu(url: string): Promise<VideoData> {
 
         if (!videoId) {
             videoId = findDeepValue(xhsData, 'id') || findDeepValue(xhsData, 'noteId') || '';
+        }
+        
+        const durationSec = findDeepValue(xhsData, 'duration') || (xhsData.note?.video?.duration);
+        if (durationSec) {
+            durationStr = formatDuration(durationSec);
         }
     }
 
@@ -325,6 +346,7 @@ async function scrapeXiaohongshu(url: string): Promise<VideoData> {
       platform: 'xiaohongshu',
       likes: typeof likes === 'string' ? parseCount(likes) : (likes || 0),
       user: user || 'Unknown',
+      duration: durationStr,
       originalUrl: url,
       videoId
     };

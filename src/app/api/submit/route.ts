@@ -20,7 +20,9 @@ export async function POST(req: NextRequest) {
       url,
       platform: data.platform,
       userId: data.user,
-      likes: data.likes
+      likes: data.likes,
+      duration: data.duration,
+      videoId: data.videoId
     });
 
     return NextResponse.json(record);

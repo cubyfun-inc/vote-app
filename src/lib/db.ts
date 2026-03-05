@@ -11,6 +11,7 @@ export interface VoteRecord {
   platform: 'bilibili' | 'douyin' | 'xiaohongshu';
   userId: string;
   likes: number;
+  duration?: string;
   updatedAt: string;
   videoId?: string; // New field for deduplication
 }

@@ -16,6 +16,7 @@ interface VoteRecord {
   platform: 'bilibili' | 'douyin' | 'xiaohongshu';
   userId: string;
   likes: number;
+  duration?: string;
   updatedAt: string;
 }
 
@@ -135,6 +136,7 @@ export default function Home() {
                   <th className="px-6 py-3 w-16 text-center">Rank</th>
                   <th className="px-6 py-3 w-32">Platform</th>
                   <th className="px-6 py-3">User / Creator</th>
+                  <th className="px-6 py-3 text-right">Duration</th>
                   <th className="px-6 py-3 text-right">Likes</th>
                   <th className="px-6 py-3 text-right w-40">Last Updated</th>
                 </tr>
@@ -142,7 +144,7 @@ export default function Home() {
               <tbody className="divide-y divide-gray-100">
                 {leaderboard.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
+                    <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
                       No submissions yet. Be the first to add a video!
                     </td>
                   </tr>
@@ -164,6 +166,9 @@ export default function Home() {
                       </td>
                       <td className="px-6 py-4 font-medium text-gray-900 truncate max-w-[200px]" title={record.userId}>
                         {record.userId}
+                      </td>
+                      <td className="px-6 py-4 text-right font-mono text-gray-600">
+                        {record.duration || '-'}
                       </td>
                       <td className="px-6 py-4 text-right font-mono font-bold text-blue-600">
                         {record.likes.toLocaleString()}
