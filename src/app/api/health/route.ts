@@ -1,3 +1,7 @@
+/*
+ * @Author: cuby-kimmy
+ * @LastEditors: kimmy
+ */
 import { NextResponse } from 'next/server';
 
 export async function GET() {
