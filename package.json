@@ -15,7 +15,6 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
     "next": "16.1.6",
-    "puppeteer": "^24.38.0",
     "puppeteer-core": "^24.38.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
@@ -30,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "puppeteer": "^24.38.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

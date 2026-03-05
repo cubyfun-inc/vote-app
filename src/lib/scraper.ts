@@ -1,8 +1,7 @@
 import axios from 'axios';
-import puppeteer from 'puppeteer';
 import puppeteerCore from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
-import { Browser, Page } from 'puppeteer';
+import type { Browser, Page } from 'puppeteer';
 
 interface VideoData {
   platform: 'bilibili' | 'douyin' | 'xiaohongshu';
@@ -80,6 +79,8 @@ async function getBrowser() {
       }) as unknown as Browser;
     } else {
       // Local Development Environment
+      // Dynamically import puppeteer to avoid bundling in production
+      const puppeteer = (await import('puppeteer')).default;
       browserInstance = await puppeteer.launch({
         headless: true,
         args: [
