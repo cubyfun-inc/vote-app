@@ -14,7 +14,7 @@
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
-    "next": "16.1.6",
+    "next": "16.2.3",
     "puppeteer-core": "24.23.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
