@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@sparticuz/chromium-min": "^141.0.0",
-    "axios": "^1.13.6",
+    "axios": "^1.15.2",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
